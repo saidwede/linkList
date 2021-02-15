@@ -33,38 +33,43 @@ function removeRow(id) {
 
 function load(){
     document.getElementById('thelist').innerHTML = '';
-    storedLinks = JSON.parse(localStorage.getItem("links"));
-
+    if(JSON.parse(localStorage.getItem("links"))){
+        storedLinks = JSON.parse(localStorage.getItem("links"));
+    }
     let url = new URL(window.location.href);
     let params = new URLSearchParams(url.search);
     if(params.has('password')){
         if(MD5(params.get('password').toString()) == 'd6a21c8a87cc87995d0a96b41da17a1a'){
             document.getElementById('add-button').style.display = 'inline-block';
             var i=0;
-            storedLinks.forEach(element => {
-                var li = document.createElement('li');
-                li.className = 'list-element';
-                li.innerHTML = '<h2>'+element['title']+'</h2>'+
-                                    '<div class="description">'+element['description']+'</div>'+
-                                    '<div class="link">[ '+element['link']+' ]</div>'+
-                                    '<button onclick="removeRow('+i+')">DELETE</button>';
-                document.getElementById("thelist").appendChild(li);
-                i++;
-            });
+            if(storedLinks){
+                storedLinks.forEach(element => {
+                    var li = document.createElement('li');
+                    li.className = 'list-element';
+                    li.innerHTML = '<h2>'+element['title']+'</h2>'+
+                                        '<div class="description">'+element['description']+'</div>'+
+                                        '<div class="link">[ '+element['link']+' ]</div>'+
+                                        '<button onclick="removeRow('+i+')">DELETE</button>';
+                    document.getElementById("thelist").appendChild(li);
+                    i++;
+                });
+            }
         }else{
             document.getElementById("thelist").innerHTML = "<h1>Wrong password!</h1>"
         }
     }else{
         var i=0;
-        storedLinks.forEach(element => {
-            var li = document.createElement('li');
-            li.className = 'list-element';
-            li.innerHTML = '<a href="'+element['link']+'"><h2>'+element['title']+'</h2>'+
-                                '<div class="description">'+element['description']+'</div>'+
-                                '</a>';
-            document.getElementById("thelist").appendChild(li);
-            i++;
-        });
+        if(storedLinks){
+            storedLinks.forEach(element => {
+                var li = document.createElement('li');
+                li.className = 'list-element';
+                li.innerHTML = '<a href="'+element['link']+'"><h2>'+element['title']+'</h2>'+
+                                    '<div class="description">'+element['description']+'</div>'+
+                                    '</a>';
+                document.getElementById("thelist").appendChild(li);
+                i++;
+            });
+        }  
     }
 }
 function cancel(){
