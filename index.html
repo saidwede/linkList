@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Link List</title>
+</head>
+<body>
+    <div class="toolbar">
+        <button id="add-button" onclick="showForm()">ADD NEW LINK</button>
+    </div>
+    <main>
+        <div id="add-form">
+            <div class="form">
+                <input type="text" placeholder="Short title" id="title">
+                <input type="text" placeholder="Short description" id="description">
+                <input type="text" placeholder="Full link" id="link">
+                <button onclick="addLink()">ADD</button>
+                <button onclick="cancel()">CANCEL</button>
+            </div>
+        </div>
+        <ul id="thelist"> 
+        </ul>
+    </main>
+    <script src="js/md5.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
