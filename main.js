@@ -48,8 +48,9 @@ function load(){
                     li.className = 'list-element';
                     li.innerHTML = '<h2>'+element['title']+'</h2>'+
                                         '<div class="description">'+element['description']+'</div>'+
-                                        '<div class="link">[ '+element['link']+' ]</div>'+
-                                        '<button onclick="removeRow('+i+')">DELETE</button>';
+                                        '<input type="text" id="editLink'+i+'" value="'+element['link']+'" />'+
+                                        '<button onclick="changeLink('+i+')">UPDATE</button>'+
+                                        ' <button onclick="removeRow('+i+')">DELETE</button>';
                     document.getElementById("thelist").appendChild(li);
                     i++;
                 });
@@ -91,4 +92,8 @@ function validateForm(title, description, link) {
     return true;
 }
 
-
+function changeLink(index){
+    storedLinks[index]['link'] = document.getElementById("editLink"+index).value;
+    localStorage.setItem("links", JSON.stringify(storedLinks));
+    alert('URL has been changed.');
+}
